@@ -1,163 +1,99 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconly/iconly.dart';
 import 'package:study4_app/controller/home/HomeController.dart';
 import 'package:study4_app/obj/Course.dart';
+import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
-class HomePage extends StatelessWidget{
+class HomePage extends GetView<HomeController>{
   HomePage({Key? key}) : super(key: key);
   
-  final homeController = Get.find<HomeController>();
+  final _homeController = Get.put(HomeController());
 
-  final List<Course> courseList = [
-      Course.withFullField('[IELTS General Training] Intensive Reading: Từ Vựng - Chiến Lược Làm Bài - Chữa đề chi tiết', 'https://study4.com/media/courses/Course/files/2023/12/12/gt_reading-min.webp', '699.000đ'),
-      Course.withFullField('[IELTS General Training] Intensive Reading: Từ Vựng - Chiến Lược Làm Bài - Chữa đề chi tiết', 'https://study4.com/media/courses/Course/files/2023/12/12/gt_reading-min.webp', '699.000đ'),
-      Course.withFullField('[IELTS General Training] Intensive Reading: Từ Vựng - Chiến Lược Làm Bài - Chữa đề chi tiết', 'https://study4.com/media/courses/Course/files/2023/12/12/gt_reading-min.webp', '699.000đ'),
-      Course.withFullField('[IELTS General Training] Intensive Reading: Từ Vựng - Chiến Lược Làm Bài - Chữa đề chi tiết', 'https://study4.com/media/courses/Course/files/2023/12/12/gt_reading-min.webp', '699.000đ'),
-      Course.withFullField('[IELTS General Training] Intensive Reading: Từ Vựng - Chiến Lược Làm Bài - Chữa đề chi tiết', 'https://study4.com/media/courses/Course/files/2023/12/12/gt_reading-min.webp', '699.000đ'),
-      Course.withFullField('[IELTS General Training] Intensive Reading: Từ Vựng - Chiến Lược Làm Bài - Chữa đề chi tiết', 'https://study4.com/media/courses/Course/files/2023/12/12/gt_reading-min.webp', '699.000đ'),
-      Course.withFullField('[IELTS General Training] Intensive Reading: Từ Vựng - Chiến Lược Làm Bài - Chữa đề chi tiết', 'https://study4.com/media/courses/Course/files/2023/12/12/gt_reading-min.webp', '699.000đ'),
-      Course.withFullField('[IELTS General Training] Intensive Reading: Từ Vựng - Chiến Lược Làm Bài - Chữa đề chi tiết', 'https://study4.com/media/courses/Course/files/2023/12/12/gt_reading-min.webp', '699.000đ'),
-    ];
 
   Widget build(BuildContext context){
-    return  GetBuilder<HomeController>(
+    return  GetX<HomeController>(
       builder: (controller) => Scaffold(
-        appBar: appBarGenerate(),
-        drawer: drawerGenerate(),
-        body:  bodyGenerate(courseList),
+        appBar: appBarGenerate(controller),
+        bottomNavigationBar: bottomAppBar(),
+        body:  bodyGenerate(controller.courseList),
       ),
     );
   }
   //Body generate
-    SingleChildScrollView bodyGenerate(List<Course> courseList) {
-    return SingleChildScrollView(
-          child: Column(
-            children: [
-              ListView.builder(
-                shrinkWrap: true,
-                itemCount: courseList.length,
-                itemBuilder: (context, index){
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    margin: const EdgeInsets.all(12.0),
-                    child: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Column(
-                        children: [
-                          Image.network(courseList[index].getImageAsset()),
-                          Text(
-                            courseList[index].getTitle(),
-                            style: const TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold
-                            ),
-                          ),
-                          Text(
-                            courseList[index].getPrice(),
-                            style: TextStyle(
-                              color: Colors.green[300],
-                              fontSize: 20
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),
-              SizedBox(height: 50,),
-              Divider(),
-              SizedBox(height: 10,),
-              const Text(
-                'De thi moi nhat',
-               style: TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.bold
-                ),
-              ),
-              GridView.builder(
-                padding: const EdgeInsets.all(12.0),
-                physics: const NeverScrollableScrollPhysics(), //Disable scroll for this gridview
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                ),
-                shrinkWrap: true,
-                itemCount: courseList.length,
-                itemBuilder: (context, index){
-                  return const Card(
-                    child: Padding(
-                      padding: EdgeInsets.all(16.0),
-                      child: Column(
-                        children: [
-                          Text(
-                            'IELTS Simulation Listening test',
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            'IELTS Simulation Listening test',
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  );
-                }
-                )
-            ],
+    ListView bodyGenerate(List<Course> courseList) {
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: courseList.length,
+      itemBuilder: (context, index){
+        return Container(
+          decoration: BoxDecoration(
+            color: Colors.grey[200],
+            borderRadius: BorderRadius.circular(12),
           ),
-        );
-  }
-  //Drawer generate
-    Drawer drawerGenerate() {
-    return Drawer(
-      child: ListView(
-        padding: EdgeInsets.zero,
-        children: [
-          newTextDrawer('Khoa Hoc Online'),
-          newTextDrawer('De Thi Online'),
-          newTextDrawer('Flashcards'),
-          newTextDrawer('Blog'),
-          newTextDrawer('Kich Hoat Khoa Hoc'),
-
-          Padding(
-            padding: const EdgeInsets.all(22.0),
-            child: ElevatedButton(
-              onPressed: () {
-              },
-              child: const Text(
-                'Login',
-                style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold
+          margin: const EdgeInsets.all(12.0),
+          child: Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Column(
+              children: [
+                Image.network(courseList[index].getImageAsset()),
+                Text(
+                  courseList[index].getTitle(),
+                  style: const TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold
+                  ),
                 ),
-              ),
+                Text(
+                  courseList[index].getPrice(),
+                  style: TextStyle(
+                    color: Colors.green[300],
+                    fontSize: 20
+                  ),
+                )
+              ],
             ),
           ),
-        ],
+        );
+      },
+    );
+  }
+  //Drawer generate
+    BottomAppBar bottomAppBar() {
+    return BottomAppBar(
+      elevation: 0,
+      notchMargin: 10,
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 25, vertical: 10),
+        child: Obx(() => Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _bottomAppBarItem(icon: IconlyLight.home, page: 0),
+              _bottomAppBarItem(icon: IconlyLight.bookmark, page: 1),
+              _bottomAppBarItem(icon: IconlyLight.buy, page: 2),
+              _bottomAppBarItem(icon: IconlyLight.profile, page: 3),
+            ],
+          ),
+        ),
       ),
     );
   }
+  Widget _bottomAppBarItem({icon, page}) {
+    return ZoomTapAnimation(
+      onTap: () => _homeController.goToTab(page),
+      child: Icon(icon, color: _homeController.currentPage == page ? Colors.blue : Colors.grey, size: 22,),
+    );
+  }
   //Appbar generate code
-    AppBar appBarGenerate() {
+    AppBar appBarGenerate(HomeController controller) {
     return AppBar(
-      actions: const [
+      actions: [
         Padding(
           padding: EdgeInsets.only(right: 16.0),
           child:  Text(
-            'Study4',
-            style: TextStyle(
+            controller.appName,
+            style: const TextStyle(
               fontSize: 32,
               fontWeight: FontWeight.bold,
             ),
@@ -166,17 +102,4 @@ class HomePage extends StatelessWidget{
       ],
     );
   }
-  //Item Drawer generate
-    ListTile newTextDrawer(String name) {
-    return ListTile(
-          title: Text(
-            name,
-            style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold
-            ),
-            ),
-          onTap: (){},
-        );
-    }
 }
