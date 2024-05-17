@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
-import 'package:study4_app/obj/Course.dart';
-import 'package:study4_app/view/home/tabs/CardTab.dart';
-import 'package:study4_app/view/home/tabs/CourseTab.dart';
-import 'package:study4_app/view/home/tabs/ExamTab.dart';
+import 'package:study4_app/obj/course.dart';
+import 'package:study4_app/view/home/tabs/card_tab.dart';
+import 'package:study4_app/view/home/tabs/course_tab.dart';
+import 'package:study4_app/view/home/tabs/exam_tab.dart';
 
 class HomeController extends GetxController{
   var currentPage = 1.obs;
@@ -24,15 +24,14 @@ class HomeController extends GetxController{
  final appNameEditingController = TextEditingController();
  
   List<Widget> pages = [
-    CardTab(),
-    HomeTab(),
-    ExamTab()
+    const ExamTab(),
+    const CourseTab(),
+    const CardTab(),
   ];
 
   @override
   void onInit(){
     pageController = PageController(initialPage: currentPage.value);
-
     super.onInit();
   }
   

@@ -1,7 +1,6 @@
 import 'package:get/get.dart';
-import 'package:get/get_navigation/get_navigation.dart';
-import 'package:study4_app/controller/home/HomeController.dart';
-import 'package:study4_app/view/home/HomePageView.dart';
+import 'package:study4_app/controller/home/home_controller.dart';
+import 'package:study4_app/view/home/home_page_view.dart';
 
 abstract class Routes{
   static const home = '/home';
@@ -13,7 +12,7 @@ abstract class AppPages{
   static final routes = [
     GetPage(
       name: Routes.home,
-      page: () => HomePage(),
+      page: () => const HomePage(),
       binding: BindingsBuilder.put(() => HomeController())
     )
   ];

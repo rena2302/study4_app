@@ -1,13 +1,13 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconly/iconly.dart';
-import 'package:study4_app/controller/home/HomeController.dart';
-import 'package:zoom_tap_animation/zoom_tap_animation.dart';
+import 'package:study4_app/controller/home/home_controller.dart';
 
 class HomePage extends GetView<HomeController>{
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({super.key});
 
+  @override
   Widget build(BuildContext context){
     return  GetX<HomeController>(
       builder: (controller) => Scaffold(
@@ -47,7 +47,7 @@ class HomePage extends GetView<HomeController>{
     AppBar appBarGenerate(HomeController controller) {
     return AppBar(
       title: Padding(
-        padding: EdgeInsets.only(right: 16.0),
+        padding: const EdgeInsets.only(right: 16.0),
         child:  Text(
           controller.appName,
           style: const TextStyle(
@@ -57,7 +57,7 @@ class HomePage extends GetView<HomeController>{
         ),
       ),
       actions: [
-        IconButton(onPressed: (){}, icon: Icon(Icons.settings))
+        IconButton(onPressed: (){}, icon: const Icon(Icons.settings))
       ],
     );
   }
