@@ -2,10 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:study4_app/controller/home/HomeController.dart';
 import 'package:study4_app/routes/routes.dart';
-import 'package:study4_app/view/home/HomePageView.dart';
-
 void main() {
   runApp(MainApp());
 }

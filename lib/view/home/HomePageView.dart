@@ -8,57 +8,23 @@ import 'package:zoom_tap_animation/zoom_tap_animation.dart';
 
 class HomePage extends GetView<HomeController>{
   HomePage({Key? key}) : super(key: key);
-  
-  final _homeController = Get.put(HomeController());
-
 
   Widget build(BuildContext context){
     return  GetX<HomeController>(
       builder: (controller) => Scaffold(
         appBar: appBarGenerate(controller),
         bottomNavigationBar: bottomAppBar(),
-        body:  bodyGenerate(controller.courseList),
+        body:  PageView(
+          controller: controller.pageController,
+          onPageChanged: (index){
+            controller.currentPage.value = index; 
+          },
+          children: controller.pages,
+        ),
       ),
     );
   }
-  //Body generate
-    ListView bodyGenerate(List<Course> courseList) {
-    return ListView.builder(
-      shrinkWrap: true,
-      itemCount: courseList.length,
-      itemBuilder: (context, index){
-        return Container(
-          decoration: BoxDecoration(
-            color: Colors.grey[200],
-            borderRadius: BorderRadius.circular(12),
-          ),
-          margin: const EdgeInsets.all(12.0),
-          child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Column(
-              children: [
-                Image.network(courseList[index].getImageAsset()),
-                Text(
-                  courseList[index].getTitle(),
-                  style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold
-                  ),
-                ),
-                Text(
-                  courseList[index].getPrice(),
-                  style: TextStyle(
-                    color: Colors.green[300],
-                    fontSize: 20
-                  ),
-                )
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
+ 
   //Drawer generate
     BottomAppBar bottomAppBar() {
     return BottomAppBar(
@@ -80,10 +46,13 @@ class HomePage extends GetView<HomeController>{
     );
   }
   Widget _bottomAppBarItem({icon, page}) {
-    return ZoomTapAnimation(
-      onTap: () => _homeController.goToTab(page),
-      child: Icon(icon, color: _homeController.currentPage == page ? Colors.blue : Colors.grey, size: 22,),
-    );
+    return Obx(() {
+      final _homeController = Get.find<HomeController>();
+      return ZoomTapAnimation(
+        onTap: () => _homeController.goToTab(page),
+        child: Icon(icon, color: _homeController.currentPage == page ? Colors.blue : Colors.grey, size: 22,),
+      );
+    });
   }
   //Appbar generate code
     AppBar appBarGenerate(HomeController controller) {
