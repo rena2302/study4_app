@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class SettingTab extends StatelessWidget {
-  const SettingTab({ Key? key }) : super(key: key);
+class ExamTab extends StatelessWidget {
+  const ExamTab({ Key? key }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -9,7 +9,7 @@ class SettingTab extends StatelessWidget {
       child: Container(
         color: Colors.yellow,
         child: Center(
-          child: Text('Setting'),
+          child: Text('Favorite'),
         ),
       ),
     );
