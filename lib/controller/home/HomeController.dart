@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:study4_app/obj/Course.dart';
+import 'package:study4_app/view/home/tabs/CardTab.dart';
+import 'package:study4_app/view/home/tabs/FavoriteTab.dart';
 import 'package:study4_app/view/home/tabs/HomeTab.dart';
+import 'package:study4_app/view/home/tabs/SettingTab.dart';
 
 class HomeController extends GetxController{
   var currentPage = 0.obs;
@@ -23,6 +26,9 @@ class HomeController extends GetxController{
  
   List<Widget> pages = [
     HomeTab(),
+    CardTab(),
+    FavoriteTab(),
+    SettingTab(),
   ];
 
   @override
@@ -41,6 +47,10 @@ class HomeController extends GetxController{
   void goToTab(int page) {
     currentPage.value = page;
     pageController.jumpToPage(page);
+  }
+
+  void updateCurrentPage(int index) {
+    currentPage.value = index;
   }
 
   updateCourseName(String courseName, int index){
