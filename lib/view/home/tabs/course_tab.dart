@@ -36,28 +36,25 @@ class CourseTab extends StatelessWidget{
                   borderRadius: BorderRadius.circular(12),
                 ),
                 margin: const EdgeInsets.all(12.0),
-                child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Column(
-                    children: [
-                      Image.network(courseList[index].getImageAsset()),
-                      Text(
-                        courseList[index].getTitle(),
-                        style: const TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold
-                        ),
+                child: Column(
+                  children: [
+                    Image.network(courseList[index].getImageAsset()),
+                    Text(
+                      courseList[index].getTitle(),
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold
                       ),
-                      Text(
-                        courseList[index].getPrice(),
-                        style: TextStyle(
-                          color: Colors.green[300],
-                          fontSize: 20
-                        ),
-                      )
-                    ],
-                  ),
-                ),
+                    ),
+                    Text(
+                      courseList[index].getPrice(),
+                      style: TextStyle(
+                        color: Colors.green[300],
+                        fontSize: 20
+                      ),
+                    )
+                  ],
+                ).paddingAll(12),
               );
             },
           ),

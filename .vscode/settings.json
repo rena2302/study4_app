@@ -1,3 +1,6 @@
 {
-    "cmake.sourceDirectory": "/home/rena/Documents/Workspace/flutter_learn/study4_app/linux/flutter"
+    "cmake.sourceDirectory": "/home/rena/Documents/Workspace/flutter_learn/study4_app/linux/flutter",
+    "java.compile.nullAnalysis.mode": "automatic",
+    "IDX.aI.enableInlineCompletion": true,
+    "IDX.aI.enableCodebaseIndexing": true
 }

@@ -48,52 +48,54 @@ class ExamTab extends StatelessWidget{
           'https://study4.com/media/courses/Course/files/2023/12/12/gt_reading-min.webp',
           '699.000đ'),
     ];
-    return SingleChildScrollView(
-      scrollDirection: Axis.vertical,
-      child: Column(
-        children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'Thư viện đề thi',
-                  style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-                ),
-                IconButton(
-                    onPressed: () =>
-                        showSearch(context: context, delegate: SearchUtil()),
-                    icon: const Icon(Icons.search))
-              ],
-            ).paddingAll(16),
-          GridView.builder(
-            shrinkWrap: true,
-            padding: const EdgeInsets.all(12.0),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, crossAxisSpacing: 8.0, mainAxisSpacing: 8.0),
-            itemCount: examList.length,
-            itemBuilder: (context, index) {
-              return Container(
-                margin: const EdgeInsets.all(12.0),
-                decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    borderRadius: BorderRadius.circular(12.0)),
-                child: Column(
-                  children: [
-                    Image.network(examList[index].getImageAsset()),
-                    Text(
-                      examList[index].getTitle(),
-                      style: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ).paddingAll(16),
-              );
-            },
+    return Column(
+      children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                'Thư viện đề thi',
+                style: TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
+              ),
+              IconButton(
+                  onPressed: () =>
+                      showSearch(context: context, delegate: SearchUtil()),
+                  icon: const Icon(Icons.search))
+            ],
+          ).paddingAll(16),
+
+          Expanded(
+            child: GridView.builder(
+              shrinkWrap: true,
+              padding: const EdgeInsets.all(12.0),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, crossAxisSpacing: 8.0, mainAxisSpacing: 8.0),
+              itemCount: examList.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  margin: const EdgeInsets.all(12.0),
+                  decoration: BoxDecoration(
+                      color: Colors.grey[200],
+                      borderRadius: BorderRadius.circular(12.0)),
+                    child: Column(
+                      children: [
+                        Image.network(examList[index].getImageAsset()),
+                        Text(
+                          examList[index].getTitle(),
+                          style: const TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ],
+                    ).paddingAll(16),
+                );
+              },
+            ),
           ),
-        ],
-      ),
+      ],
     );
   }
 }

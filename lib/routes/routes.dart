@@ -8,7 +8,7 @@ abstract class Routes{
 }
 
 abstract class AppPages{
-  static String inital = Routes.home;
+  static String initial = Routes.home;
   static final routes = [
     GetPage(
       name: Routes.home,
